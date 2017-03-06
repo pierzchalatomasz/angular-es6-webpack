@@ -24,7 +24,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "webpack --define \"environment\"=\"'development'\" --progress --colors && live-server --entry-file=index.html"
+    "start": "start webpack --define \"environment\"=\"'development'\" --progress --colors --watch && cd src && live-server --entry-file=index.html"
   },
   "author": "Tomasz Pierzchała",
   "license": "ISC"
