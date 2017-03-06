@@ -1,5 +1,5 @@
 {
-  "name": "codetogether-website",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -17,7 +17,6 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "live-server": "^1.1.0",
-    "phoenix": "^1.2.1",
     "rxjs": "^5.0.0-rc.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2"
@@ -25,7 +24,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "webpack --define \"environment\"=\"'production'\" --progress --colors && live-server --entry-file=index.html"
+    "start": "webpack --define \"environment\"=\"'development'\" --progress --colors && live-server --entry-file=index.html"
   },
   "author": "Tomasz Pierzchała",
   "license": "ISC"

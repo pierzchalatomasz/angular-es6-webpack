@@ -2,10 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var GenerateIndex = require('./web_modules/generateIndex');
 
-var definePlugin = new webpack.DefinePlugin({
-  environment: JSON.stringify(JSON.parse(`"${process.env.NODE_ENV}"` || '"development"'))
-});
-
 module.exports = {
   cache: false,
   target: 'web',
@@ -40,5 +36,5 @@ module.exports = {
       path.resolve('./src/app')
     ]
   },
-  plugins: [new GenerateIndex(), definePlugin]
+  plugins: [new GenerateIndex()]
 };
