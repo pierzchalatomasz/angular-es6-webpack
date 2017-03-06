@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="{{lang}}">
+
+<head meta-tags event-structured-data>
+    <title>Happns</title>
+
+    <base href="/">
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="/assets/libs/angular-material/angular-material.css">
+    <link rel="stylesheet" href="/assets/libs/animate.css/animate.min.css">
+</head>
+
+<body class="dev">
+    <div layout="row" layout-fill>
+        <md-content class="main-view-container" flex>
+            <ui-view></ui-view>
+        </md-content>
+    </div>
+
+    <script src="/assets/libs/angular/angular.min.js"></script>
+    <script src="/assets/libs/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/assets/libs/angular-resource/angular-resource.min.js"></script>
+    <script src="/assets/libs/angular-aria/angular-aria.js"></script>
+    <script src="/assets/libs/angular-animate/angular-animate.js"></script>
+    <script src="/assets/libs/angular-material/angular-material.min.js"></script>
+    <script src="/assets/libs/angular-messages/angular-messages.min.js"></script>
+    <script src="/assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!--<script src="/assets/libs/lodash/lodash.min.js"></script>-->
+
+    <script type="text/javascript" src="app.js" charset="utf-8"></script>
+</body>
+
+</html>
