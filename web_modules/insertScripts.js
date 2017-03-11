@@ -45,7 +45,7 @@ InsertScripts.prototype.apply = function (compiler) {
         return htmlStyles;
     };
 
-    compiler.plugin('done', () => {
+    compiler.plugin('compile', () => {
         var content = fs.readFileSync(entry, 'utf-8');
 
         var htmlScripts = generateScriptsHtml(scripts);

@@ -20,10 +20,10 @@ CopyAssets.prototype.apply = function (compiler) {
         fs.mkdirSync(dirname);
     }
 
-    compiler.plugin('done', () => {
+    compiler.plugin('compile', () => {
         for (var asset of assets) {
-            var entry = path.join(compiler.context, `./src/${asset}`);
-            var output = path.join(compiler.context, `./dist/${asset}`);
+            var entry = path.join(`${compiler.context}/src`, asset);
+            var output = path.join(`${compiler.context}/dist`, asset);
 
             createDirectory(output);
 
