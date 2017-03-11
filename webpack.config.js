@@ -1,6 +1,19 @@
 var webpack = require('webpack');
 var path = require('path');
 var GenerateIndex = require('./web_modules/generateIndex');
+var InsertScripts = require('./web_modules/insertScripts');
+var CopyAssets = require('./web_modules/copyAssets');
+
+var scripts = [
+  'assets/libs/angular/angular.min.js',
+  'assets/libs/angular-cookies/angular-cookies.min.js',
+  'assets/libs/angular-resource/angular-resource.min.js',
+  'assets/libs/angular-aria/angular-aria.js',
+  'assets/libs/angular-animate/angular-animate.js',
+  'assets/libs/angular-material/angular-material.min.js',
+  'assets/libs/angular-messages/angular-messages.min.js',
+  'assets/libs/angular-ui-router/release/angular-ui-router.min.js'
+];
 
 module.exports = {
   cache: false,
@@ -8,7 +21,7 @@ module.exports = {
   entry: ['babel-regenerator-runtime', './src/app/app.js'],
   output: {
     path: __dirname,
-    filename: './src/app.js',
+    filename: './dist/app.js',
   },
   module: {
     loaders: [
@@ -36,5 +49,13 @@ module.exports = {
       path.resolve('./src/app')
     ]
   },
-  plugins: [new GenerateIndex()]
+  plugins: [
+    new GenerateIndex(),
+    new InsertScripts({
+      entry: './src/index.html',
+      output: './dist/index.html',
+      scripts: scripts
+    }),
+    new CopyAssets(scripts)
+  ]
 };
