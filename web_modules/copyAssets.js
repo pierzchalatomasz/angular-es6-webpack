@@ -24,10 +24,9 @@ CopyAssets.prototype.apply = function (compiler) {
             var entry = path.join(compiler.context, `./src/${script}`);
             var output = path.join(compiler.context, `./dist/${script}`);
 
-            if (!fs.existsSync(output)) {
-                createDirectory(output);
-                fs.createReadStream(entry).pipe(fs.createWriteStream(output));
-            }
+            createDirectory(output);
+
+            fs.createReadStream(entry).pipe(fs.createWriteStream(output));
         }
     });
 };

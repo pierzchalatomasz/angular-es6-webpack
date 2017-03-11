@@ -8,11 +8,15 @@ var scripts = [
   'assets/libs/angular/angular.min.js',
   'assets/libs/angular-cookies/angular-cookies.min.js',
   'assets/libs/angular-resource/angular-resource.min.js',
-  'assets/libs/angular-aria/angular-aria.js',
-  'assets/libs/angular-animate/angular-animate.js',
+  'assets/libs/angular-aria/angular-aria.min.js',
+  'assets/libs/angular-animate/angular-animate.min.js',
   'assets/libs/angular-material/angular-material.min.js',
   'assets/libs/angular-messages/angular-messages.min.js',
   'assets/libs/angular-ui-router/release/angular-ui-router.min.js'
+];
+
+var stylesheets = [
+  'assets/libs/angular-material/angular-material.min.css'
 ];
 
 module.exports = {
@@ -56,6 +60,7 @@ module.exports = {
       output: './dist/index.html',
       scripts: scripts
     }),
-    new CopyAssets(scripts)
+    new CopyAssets(scripts),
+    new CopyAssets(stylesheets)
   ]
 };
