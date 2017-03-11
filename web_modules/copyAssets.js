@@ -1,12 +1,13 @@
 var path = require('path');
 var fs = require('fs');
 
-var CopyAssets = function (scripts) {
-    this.scripts = scripts;
+var CopyAssets = function ({ scripts, styles }) {
+    this.scripts = scripts || [];
+    this.styles = styles || [];
 };
 
 CopyAssets.prototype.apply = function (compiler) {
-    var scripts = this.scripts;
+    var assets = this.scripts.concat(this.styles);
 
     var createDirectory = function (filePath) {
         var dirname = path.dirname(filePath);
@@ -20,9 +21,9 @@ CopyAssets.prototype.apply = function (compiler) {
     }
 
     compiler.plugin('done', () => {
-        for (var script of scripts) {
-            var entry = path.join(compiler.context, `./src/${script}`);
-            var output = path.join(compiler.context, `./dist/${script}`);
+        for (var asset of assets) {
+            var entry = path.join(compiler.context, `./src/${asset}`);
+            var output = path.join(compiler.context, `./dist/${asset}`);
 
             createDirectory(output);
 

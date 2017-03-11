@@ -5,12 +5,14 @@ var InsertScripts = function (options) {
     this.entry = options.entry;
     this.scripts = options.scripts;
     this.output = options.output;
+    this.styles = options.styles;
 };
 
 InsertScripts.prototype.apply = function (compiler) {
     var entry = this.entry;
     var output = path.join(compiler.context, this.output);
     var scripts = this.scripts;
+    var styles = this.styles;
 
     var createDirectory = function (filePath) {
         var dirname = path.dirname(filePath);
@@ -21,18 +23,36 @@ InsertScripts.prototype.apply = function (compiler) {
 
         createDirectory(dirname);
         fs.mkdirSync(dirname);
-    }
+    };
+
+    var generateScriptsHtml = function (scripts) {
+        var htmlScripts = '';
+
+        for (var x of scripts) {
+            htmlScripts += `<script src="/${x}" type="text/javascript"></script>\n\t`;
+        }
+
+        return htmlScripts;
+    };
+
+    var generateStylesHtml = function (styles) {
+        var htmlStyles = '';
+
+        for (var x of styles) {
+            htmlStyles += `<link rel="stylesheet" href="/${x}">\n\t`;
+        }
+
+        return htmlStyles;
+    };
 
     compiler.plugin('done', () => {
         var content = fs.readFileSync(entry, 'utf-8');
 
-        var htmlToAdd = '';
+        var htmlScripts = generateScriptsHtml(scripts);
+        content = content.replace('%INSERT-SCRIPTS%', htmlScripts);
 
-        for (var x of scripts) {
-            htmlToAdd += `<script src="/${x}" type="text/javascript"></script>\n\t`;
-        }
-
-        content = content.replace('<!--INSERT-SCRIPTS-->', htmlToAdd);
+        var htmlStyles = generateStylesHtml(styles);
+        content = content.replace('%INSERT-STYLES%', htmlStyles);
 
         createDirectory(output);
         fs.writeFileSync(output, content);

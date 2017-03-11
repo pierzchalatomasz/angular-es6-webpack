@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="/assets/libs/angular-material/angular-material.min.css">
+    %INSERT-STYLES%
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,400,300,700,400italic,300italic,700italic,900" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -24,8 +24,10 @@
         </md-content>
     </div>
 
-    <!--INSERT-SCRIPTS-->
-    <script type="text/javascript" src="app.js" charset="utf-8"></script>
+    %INSERT-SCRIPTS%
+    <script src="/assets/commons.js" type="text/javascript" charset="utf-8"></script>
+    <script src="vendor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

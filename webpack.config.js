@@ -15,17 +15,20 @@ var scripts = [
   'assets/libs/angular-ui-router/release/angular-ui-router.min.js'
 ];
 
-var stylesheets = [
+var styles = [
   'assets/libs/angular-material/angular-material.min.css'
 ];
 
 module.exports = {
   cache: false,
   target: 'web',
-  entry: ['babel-regenerator-runtime', './src/app/app.js'],
+  entry: {
+    app: './src/app/app.js',
+    vendor: ['babel-regenerator-runtime', 'q']
+  },
   output: {
     path: __dirname,
-    filename: './dist/app.js',
+    filename: './dist/[name].js'
   },
   module: {
     loaders: [
@@ -39,11 +42,11 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loader: "style!css!less",
+        loader: 'style!css!less',
       },
       {
         test: /\.html$/,
-        loader: "html"
+        loader: 'html'
       }
     ],
   },
@@ -58,9 +61,17 @@ module.exports = {
     new InsertScripts({
       entry: './src/index.html',
       output: './dist/index.html',
-      scripts: scripts
+      scripts,
+      styles
     }),
-    new CopyAssets(scripts),
-    new CopyAssets(stylesheets)
+    new CopyAssets({ scripts, styles }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: './dist/assets/commons.js'
+    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   exclude: /\app\.js$/,
+    //   warnings: false
+    // })
   ]
 };
