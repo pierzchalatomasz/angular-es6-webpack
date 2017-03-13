@@ -1,4 +1,7 @@
 node_modules
 src/assets/libs
 src/app.js
+src/vendor.js
+src/assets/scripts/commons.js
+src/index.html
 dist

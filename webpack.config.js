@@ -1,8 +1,14 @@
+var _ = require('lodash');
 var webpack = require('webpack');
 var path = require('path');
 var GenerateIndex = require('./web_modules/generateIndex');
 var InsertScripts = require('./web_modules/insertScripts');
 var CopyAssets = require('./web_modules/copyAssets');
+
+var production = require('./webpack_config/production');
+var development = require('./webpack_config/development');
+
+var webpackConfig = process.env.NODE_ENV === 'production' ? production : development;
 
 var scripts = [
   'assets/libs/angular/angular.min.js',
@@ -19,16 +25,12 @@ var styles = [
   'assets/libs/angular-material/angular-material.min.css'
 ];
 
-module.exports = {
+var sharedConfig = {
   cache: false,
   target: 'web',
   entry: {
     app: './src/app/app.js',
     vendor: ['babel-regenerator-runtime', 'q']
-  },
-  output: {
-    path: __dirname,
-    filename: './dist/[name].js'
   },
   module: {
     loaders: [
@@ -55,23 +57,7 @@ module.exports = {
     root: [
       path.resolve('./src/app')
     ]
-  },
-  plugins: [
-    new GenerateIndex(),
-    new InsertScripts({
-      entry: './src/index.html',
-      output: './dist/index.html',
-      scripts,
-      styles
-    }),
-    new CopyAssets({ scripts, styles }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: './dist/assets/commons.js'
-    }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   exclude: /\app\.js$/,
-    //   warnings: false
-    // })
-  ]
+  }
 };
+
+module.exports = _.extend(sharedConfig, webpackConfig({ scripts, styles }));
