@@ -1,25 +1,32 @@
+var _ = require('lodash');
 var webpack = require('webpack');
 var GenerateIndex = require('../web_modules/generateIndex');
 var InsertScripts = require('../web_modules/insertScripts');
 
-module.exports = function ({ scripts, styles }) {
-    return {
-        output: {
-            path: __dirname,
-            filename: '../src/[name].js'
-        },
-        plugins: [
-            new GenerateIndex(),
-            new InsertScripts({
-                entry: './src/index-template.html',
-                output: './src/index.html',
-                scripts,
-                styles
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'commons',
-                filename: '../src/assets/scripts/commons.js'
-            }),
-        ]
-    }
-}
+var global = require("./../webpack.config.js");
+
+var local = {
+    output: {
+        path: '../src',
+        filename: '[name].js',
+    },
+    plugins: [
+        new GenerateIndex(),
+        new InsertScripts({
+            entry: './src/index-template.html',
+            output: './src/index.html',
+            scripts: global.scripts,
+            styles: global.styles
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'commons',
+            path: '../src',
+            filename: 'assets/scripts/commons.js'
+        }),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(JSON.parse(`"${process.env.NODE_ENV}"` || '"development"'))
+        })
+    ]
+};
+
+module.exports = _.extend(global.config, local);

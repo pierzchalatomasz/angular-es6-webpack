@@ -16,17 +16,17 @@
     "html-loader": "^0.4.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "live-server": "^1.1.0",
     "q": "^1.4.1",
     "rxjs": "^5.0.0-rc.4",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.13.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "start webpack --define \"environment\"=\"'development'\" --progress --colors --watch && cd src && live-server --entry-file=index.html",
-    "dist": "set NODE_ENV=production&& webpack --progress --colors"
+    "start": "./node_modules/.bin/webpack-dev-server --content-base src --inline --progress --colors --watch --config webpack_config/development.js --history-api-fallback true",
+    "dist": "./node_modules/.bin/webpack --progress --colors --config webpack_config/production.js"
   },
   "author": "Tomasz Pierzchała",
   "license": "ISC"

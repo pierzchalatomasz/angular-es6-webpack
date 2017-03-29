@@ -1,4 +1,4 @@
-var netAddress = environment === 'production' ? 'prod' : 'dev';
+var netAddress = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
 module.exports = {
     netAddress,

@@ -5,12 +5,7 @@ var GenerateIndex = require('./web_modules/generateIndex');
 var InsertScripts = require('./web_modules/insertScripts');
 var CopyAssets = require('./web_modules/copyAssets');
 
-var production = require('./webpack_config/production');
-var development = require('./webpack_config/development');
-
-var webpackConfig = process.env.NODE_ENV === 'production' ? production : development;
-
-var scripts = [
+module.exports.scripts = [
   'assets/libs/angular/angular.min.js',
   'assets/libs/angular-cookies/angular-cookies.min.js',
   'assets/libs/angular-resource/angular-resource.min.js',
@@ -21,11 +16,11 @@ var scripts = [
   'assets/libs/angular-ui-router/release/angular-ui-router.min.js'
 ];
 
-var styles = [
+module.exports.styles = [
   'assets/libs/angular-material/angular-material.min.css'
 ];
 
-var sharedConfig = {
+module.exports.config = {
   cache: false,
   target: 'web',
   entry: {
@@ -59,5 +54,3 @@ var sharedConfig = {
     ]
   }
 };
-
-module.exports = _.extend(sharedConfig, webpackConfig({ scripts, styles }));
