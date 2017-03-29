@@ -14,7 +14,7 @@ var local = {
     plugins: [
         new GenerateIndex(),
         new InsertScripts({
-            entry: './src/index.html',
+            entry: './src/index-template.html',
             output: './dist/index.html',
             scripts: global.scripts,
             styles: global.styles
